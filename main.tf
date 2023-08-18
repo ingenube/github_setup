@@ -1,6 +1,6 @@
-provider "github" {
-  token = var.github_token
-  owner = var.owner
+data "aws_ssm_parameter" "gh_token" {
+  name            = "gh-token"
+  with_decryption = true
 }
 
 resource "github_repository" "this" {
