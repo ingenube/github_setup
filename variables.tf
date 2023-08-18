@@ -1,13 +1,6 @@
 variable "owner" {
   description = "The account/organization to create the resources in"
   type        = string
-  default     = "ingenube2"
-}
-
-variable "github_token" {
-  description = "The GitHub token used for authentication."
-  type        = string
-  default     = ""
 }
 
 variable "repositories" {
