@@ -17,9 +17,7 @@ jobs:
         uses: actions/checkout@v3
       
       - name: Download build script
-        run: curl -o $PWD/cicd/build.sh https://raw.githubusercontent.com/matiiponchon/53490083/main/build.sh --create-dirs
-          curl -o $PWD/cicd/test.sh https://raw.githubusercontent.com/matiiponchon/53490083/main/test.sh
-          curl -o $PWD/cicd/deploy.sh https://raw.githubusercontent.com/matiiponchon/53490083/main/deploy.sh
+        run: curl -o $PWD/cicd/build.sh https://raw.githubusercontent.com/ingenube/53490083/main/build.sh --create-dirs
       
       - name: Give script execution permissions
         run: chmod u+x $PWD/cicd/build.sh
@@ -36,7 +34,7 @@ jobs:
         uses: actions/checkout@v3
       
       - name: Download test script
-        run: curl -o $PWD/cicd/test.sh https://raw.githubusercontent.com/matiiponchon/53490083/main/test.sh --create-dirs
+        run: curl -o $PWD/cicd/test.sh https://raw.githubusercontent.com/ingenube/53490083/main/test.sh --create-dirs
 
       - name: Give script execution permissions
         run: chmod u+x $PWD/cicd/test.sh
@@ -53,7 +51,7 @@ jobs:
         uses: actions/checkout@v3
       
       - name: Download deploy script
-        run: curl -o $PWD/cicd/deploy.sh https://raw.githubusercontent.com/matiiponchon/53490083/main/deploy.sh --create-dirs
+        run: curl -o $PWD/cicd/deploy.sh https://raw.githubusercontent.com/ingenube/53490083/main/deploy.sh --create-dirs
 
       - name: Give script execution permissions
         run: chmod u+x $PWD/cicd/deploy.sh
